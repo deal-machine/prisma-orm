@@ -1,0 +1,3 @@
+class AuthenticateOperatorService {}
+
+export { AuthenticateOperatorService };
