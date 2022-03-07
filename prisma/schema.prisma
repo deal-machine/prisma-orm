@@ -10,7 +10,7 @@ datasource db {
 model Operator {
   id         String          @id @default(uuid())
   email      String          @unique
-  name       String?
+  name       String
   password   String
   isAdmin    Boolean         @default(false)
   created_at DateTime        @default(now())
@@ -22,9 +22,10 @@ model Operator {
 model OperatorToken {
   id            String   @id @default(uuid())
   refresh_token String
-  operator      Operator @relation(fields: [operatorId], references: [id])
   operatorId    String   @default(uuid())
   created_at    DateTime @default(now())
+  operator      Operator @relation(fields: [operatorId], references: [id])
 
+  @@index([operatorId], map: "operators_tokens_operatorId_fkey")
   @@map("operators_tokens")
 }
